@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Bank {
 	final private String name;
 	final private ArrayList<Client> clients = new ArrayList<Client>();
+	final private ArrayList<Account> accounts = new ArrayList<Account>();
 	private int IDclient = 1;
 	private int IDaccount = 1;
 	final private Scanner sc = new Scanner(System.in);
@@ -86,7 +87,7 @@ public class Bank {
 			System.out.print("Voulez-vous gérer vos comptes ? : 0/non 1/oui : ");
 			int isGest = sc.nextInt();
 			if(isGest == 1) {
-				client.manage(sc);
+				client.manage(sc, this);
 			}
 		}
 	}
@@ -125,7 +126,12 @@ public class Bank {
 			
 			Account account = new Account(IDaccount, client, MaxGet, overdraft);
 			System.out.println(client.toString()+" : votre compte bancaire a bien été créé avec l'ID : "+account.getID());
+			this.getAccounts().add(account);
 			this.IDaccount++;
 		}
+	}
+
+	public ArrayList<Account> getAccounts() {
+		return accounts;
 	}
 }

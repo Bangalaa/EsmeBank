@@ -47,7 +47,7 @@ public class Client {
 		}
 	}
 
-	public void manage(Scanner sc) {
+	public void manage(Scanner sc, Bank bank) {
 		// TODO Retirer, déposer, virer
 		System.out.println("Que voulez vous faire ?");
 		System.out.println("1 : retirer de l'argent");
@@ -86,7 +86,22 @@ public class Client {
 						account.deposit(amountDeposit);
 						break;
 					case 3:
-						System.out.println("Virement");
+						System.out.print("Vers quel compte voulez vous virer l'argent ? : ");
+						int accNumber = sc.nextInt();
+						Account accountTarget = null;
+						for(Account element : bank.getAccounts()) {
+							if(element.getID() == accNumber) {
+								accountTarget = element;
+							}
+						}
+						if(accountTarget != null) {
+							System.out.println("Le compte sur lequel vous voulez faire le virement appartient à "+accountTarget.getClient().toString());
+							System.out.println("Combien voulez vous virer : ");
+							final long valueTransfert = sc.nextLong();
+							account.transfert(valueTransfert, accountTarget);
+						}else {
+							System.out.println("Le compte n'a pas été trouvé : veuillez réessayer !");
+						}
 						break;
 					case 4:
 						break;
