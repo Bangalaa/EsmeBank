@@ -12,7 +12,7 @@ public class Account {
 		this.setClient(client);
 		this.ID = ID;
 		this.setMaxGet(maxGet);
-		this.overdraft = overdraft;
+		this.overdraft = -overdraft;
 		this.client.addAcount(this);
 	}
 
@@ -50,6 +50,7 @@ public class Account {
 				if (this.solde - amount > this.overdraft) {
 					this.solde -= amount;
 					System.out.println("Vous avez retiré "+amount+"€ avec succès");
+					System.out.println("Le solde du compte est maintenant de "+this.getSolde()+"€");
 					this.nbOperations++;
 				}else {
 					System.out.println("Erreur : vous allez dépasser votre découvert maximal autorisé");
@@ -67,6 +68,7 @@ public class Account {
 		if(amount > 0) {
 			this.solde += amount;
 			System.out.println("Vous avez déposé "+amount+"€ avec succès");
+			System.out.println("Le solde du compte est maintenant de "+this.getSolde()+"€");
 			nbOperations++;
 		}else {
 			System.out.println("Erreur : veuillez indiquer une somme positive");
@@ -78,7 +80,9 @@ public class Account {
 			if (amount <= this.maxGet) {
 				if (this.solde - amount > this.overdraft) {
 					this.solde -= amount;
-					System.out.println("Vous avez virer "+amount+"€ avec succès à "+account.getClient().toString());
+					System.out.println("Vous avez viré "+amount+"€ avec succès à "+account.getClient().toString());
+					System.out.println("Le solde de votre compte est maintenant de "+this.getSolde()+"€");
+					account.setSolde(account.getSolde()+amount);
 				}else {
 					System.out.println("Erreur : vous allez dépasser votre découvert maximal autorisé");
 				}

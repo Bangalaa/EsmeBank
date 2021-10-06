@@ -119,6 +119,7 @@ public class Bank {
 		if(client == null) {
 			System.out.println("Votre id client n'a pas été trouvé : veuillez réessayer !");
 		}else {
+			System.out.println("Vous allez créer un compte pour "+client.toString());
 			System.out.print("Donnez la valeur maximal de retrait : ");
 			final long MaxGet = sc.nextLong();
 			System.out.print("Donnez la valeur maximal de découvert : ");
